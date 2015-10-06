@@ -4,10 +4,11 @@
     <head>
         <title>Brewery Console</title>
         <script src="<c:url value="/resources/js/angular.js"/>"></script>
+        <script src="<c:url value="/resources/js/dirPagination.js"/>"></script>
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>" />
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.css"/>" />
         <script>
-            angular.module("growlerStore", []);
+            angular.module("growlerStore", ['angularUtils.directives.dirPagination']);
         </script>
         <script src="<c:url value="/resources/controllers/beer.js"/>"></script>
         <script src="<c:url value="/resources/controllers/directiveController.js"/>"></script>
@@ -99,7 +100,7 @@
                     <div class="form-group" >
                         <label class="control-label" for="searchKeyword">Search:</label>
                         <input type="text" id="searchKeyword" class="form-control"
-                               ng-model="searchKeyword">
+                               ng-model="q">
                     </div>
                 </div>
 
@@ -114,8 +115,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="brewery in data.breweries |
-                         orderBy: 'brewery' | filter: searchKeyword">
+                        <tr dir-paginate="brewery in data.breweries | filter:q | itemsPerPage: pageSize" current-page="currentPage">
                             <td>{{brewery.name}}</td>
                             <td>{{brewery.location}}</td>
                             <td>{{brewery.description}}</td>
@@ -133,25 +133,10 @@
                             </td>
                         </tr>
                     </tbody>
-                    <tfoot>
-                    <tr>
-                    <td colspan="5" class="text-center">
-                        <div class="pagination">
-                            <ul class="pagination">
-                                <li><a href="#">Prev</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">Next</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                    </tr>
-                    </tfoot>
                 </table>
-
+                <div class="text-center">
+                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.jsp"></dir-pagination-controls>
+                </div>
             </div>
         </div>
     </div>

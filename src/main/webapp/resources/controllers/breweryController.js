@@ -1,4 +1,14 @@
 angular.module("growlerStore")
+    .filter('offset', function() {
+        return function(input, start) {
+            if(angular.isUndefined(input)){
+                return 0;
+            }
+            start = parseInt(start, 10);
+            return input.slice(start);
+        };
+    })
+
     .factory('BreweryService', function($rootScope, $http){
         var breweryService = {};
         breweryService.data = {};
@@ -18,9 +28,11 @@ angular.module("growlerStore")
     })
 
     .controller("breweryCtrl", function ($scope, $http, BreweryService){
+        // define variables
         $scope.data = {};
         $scope.data = BreweryService.getBreweries();
-
+        $scope.pageSize = 5;
+        $scope.currentPage = 1;
         // Add a new row
         $scope.addRowAsyncAsJSON = function(brewery){
             var dataObj = {
@@ -84,8 +96,11 @@ angular.module("growlerStore")
                 alert("Invalid index");
             }
             $scope.data.breweries.splice(index, 1);
-
         };
+
+        // functions for pagination
+
+
 
 
     });

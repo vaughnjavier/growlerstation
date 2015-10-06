@@ -11,7 +11,7 @@
         </script>
         <script src="<c:url value="/resources/controllers/beer.js"/>"></script>
         <script src="<c:url value="/resources/controllers/directiveController.js"/>"></script>
-        <script src="<c:url value="/resources/controllers/beerListControllers.js"/>"></script>
+        <script src="<c:url value="/resources/controllers/beerListController.js"/>"></script>
         <script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"/>"></script>
         <script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
     </head>

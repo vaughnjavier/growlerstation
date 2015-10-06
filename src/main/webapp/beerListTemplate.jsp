@@ -10,13 +10,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="beer in data.beers | orderBy: ['brewery', 'name']">
+    <tr dir-paginate="beer in data.beer | itemsPerPage: pageSize" current-page="currentPage">
         <td>{{beer.brewery}}</td>
         <td>{{beer.name}}</td>
         <td>{{beer.style}}</td>
-        <td>{{beer.price}}</td>
-        <td>{{beer.size}}</td>
-        <td>{{beer.abv}}</td>
+        <td>{{beer.pricing}}</td>
+        <td>{{beer.pourSize}} oz</td>
+        <td>{{beer.abv}}%</td>
         <td>
             <button type="button" class="btn btn-success" ng-hide="readOnly">
                 <span class="glyphicon glyphicon-edit"></span>
